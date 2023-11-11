@@ -1,11 +1,11 @@
-## Téléchargement du dataset
+## :floppy_disk: Téléchargement du dataset
 
 Le dataset utilisé pour ce projet est disponible sur Google Drive :
 Il est nécessaire de télécharger ce dataset et de le dezipper dans le dossier `classifier` du projet.
 
 [Lien vers Faces_Dataset_processed](https://drive.google.com/file/d/11KawCPnuEFLHctgBaqw3eKaKM5kAfryL/view?usp=sharing)
 
-## --> 
+## :play_or_pause_button:  
 ![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/pipeline.png)
 
 

@@ -5,7 +5,4 @@ tensorflow==2.14.0
 mtcnn==0.1.1
 tqdm==4.66.1
 keras-facenet==0.3.2
-deepface==0.0.79
 matplotlib==3.8.0
-git+https://github.com/rcmalli/keras-vggface.git
-Flask==3.0.0

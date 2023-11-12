@@ -5,7 +5,7 @@ Il est nécessaire de télécharger ce dataset et de le dezipper dans le dossier
 
 [Lien vers Faces_Dataset_processed](https://drive.google.com/file/d/11KawCPnuEFLHctgBaqw3eKaKM5kAfryL/view?usp=sharing)
 
-## Setup
+## Quick Match
 
 ```bash
 pip install all_requirements.txt

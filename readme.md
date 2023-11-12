@@ -31,7 +31,6 @@ python flask_app/app.py
 ├── readme.md                            # Vous êtes ici !
 ├── mega_requirements.txt                # requirements pour tout le projet
 ├── classifier
-│   ├── allowed_list.txt                 # contient la liste des nom des personnes 'allowed'
 │   ├── celeb_embeddings.csv             # dataframe utilisable par Support Vector Classifier
 │   ├── classifier.ipynb                 # permet d'entrainer et d'evaluer un Support Vector Classifier
 │   ├── dataset_to_csv.ipynb             # permet de créer celeb_embeddings.csv

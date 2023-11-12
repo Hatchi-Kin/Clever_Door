@@ -128,8 +128,11 @@ def return_matches():
 @login_required
 def admin_dashboard():
     df_predicted = pd.read_csv("flask_app/static/predicted.csv")                              ### path
+    length = len(df_predicted)
+    # Only display the last 15 predictions in reverse chronological order
+    df_predicted = df_predicted.tail(15)
     predictions_dict = dict(zip(df_predicted["filename"], df_predicted["prediction"]))
-    return render_template("admin_dashboard.html", predictions=predictions_dict)
+    return render_template("admin_dashboard.html", predictions=predictions_dict, length=length)
 
 
 # Define a route to view the uploaded image from the admin dashboard
@@ -138,6 +141,7 @@ def admin_dashboard():
 def image(filename):
     image_url = url_for("static", filename="uploaded_image_processed/" + filename)
     return render_template("image.html", image_url=image_url)
+
 
 
 if __name__ == "__main__":

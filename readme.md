@@ -1,4 +1,4 @@
-## Quick Match
+## Quick Setup
 
 ```bash
 pip install all_requirements.txt

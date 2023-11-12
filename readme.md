@@ -1,10 +1,3 @@
-## :floppy_disk: Téléchargement du dataset
-
-Le dataset utilisé pour ce projet est disponible sur Google Drive :
-Il est nécessaire de télécharger ce dataset et de le dezipper dans le dossier `classifier` du projet.
-
-[Lien vers Faces_Dataset_processed](https://drive.google.com/file/d/11KawCPnuEFLHctgBaqw3eKaKM5kAfryL/view?usp=sharing)
-
 ## Quick Match
 
 ```bash
@@ -15,11 +8,18 @@ pip install all_requirements.txt
 python flask_app/app.py
 ```
 
+## :floppy_disk: Téléchargement du dataset
+
+Le dataset utilisé pour ce projet est disponible sur Google Drive :
+Il est nécessaire de télécharger ce dataset et de le dezipper dans le dossier `classifier` du projet.
+
+[Lien vers Faces_Dataset_processed](https://drive.google.com/file/d/11KawCPnuEFLHctgBaqw3eKaKM5kAfryL/view?usp=sharing)
+
 
 ## :play_or_pause_button:  
 ![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/classifier/test_images/pipeline.png)
 
-## Now with an admin 
+## Now with an admin !
 ![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/classifier/test_images/admin.png)
 
 
@@ -29,7 +29,7 @@ python flask_app/app.py
 .
 ├── pipeline.png
 ├── readme.md                            # Vous êtes ici !
-├── mega_requirements.txt                # requirements pour tout le projet
+├── all_requirements.txt                # requirements pour tout le projet
 ├── classifier
 │   ├── celeb_embeddings.csv             # dataframe utilisable par Support Vector Classifier
 │   ├── classifier.ipynb                 # permet d'entrainer et d'evaluer un Support Vector Classifier

@@ -51,6 +51,9 @@ class ImageProcessor:
             image = Image.open(image_input)
             image = np.array(image)
 
+        # Convert the image from BGR to RGB format
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
         # Detect faces in the image
         detection_results = self.face_detector.detect_faces(image)
         if len(detection_results) == 0:

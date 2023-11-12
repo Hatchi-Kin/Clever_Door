@@ -1,7 +1,6 @@
 from process_pipeline import ImageProcessor
 from PIL import Image
 import io
-import base64
 from datetime import datetime as Datetime
 import numpy as np
 import pandas as pd
@@ -44,7 +43,6 @@ def load_user(user_id):
         return Admin(user_id)
     return None
 
-
 # Create an Admin object with the Flask app instance as the id
 admin = Admin(app)
 
@@ -56,6 +54,7 @@ def extract_embedding(image_path, model):
     embedding = model.embeddings(np.array([image]))[0]
     df = pd.DataFrame([embedding])
     return df
+
 
 
 # Define a route for the home page
@@ -71,9 +70,7 @@ def login():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-        if (
-            username == "admin" and password == "admin"                                        ### ADMIN LOGIN
-        ):  # Replace with your own username and password
+        if (username == "admin" and password == "admin" ):                                    ### ADMIN LOGIN  
             user = Admin("admin")
             login_user(user)
             return redirect(url_for("admin_dashboard"))
@@ -89,26 +86,28 @@ def logout():
     return redirect(url_for("index"))
 
 
-# Define a route for the upload page
+# Define a route to upload an image and return the prediction
 @app.route("/matches", methods=["POST"])
 def return_matches():
+    # Process and save the uploaded image
     uploaded_image = request.files["image"]
     uploaded_image_processed = processor.process_image(image_input=uploaded_image)
     pil_image = Image.fromarray((uploaded_image_processed).astype(np.uint8))
+    pil_image = pil_image.convert("RGB")
     byte_arr = io.BytesIO()
     pil_image.save(byte_arr, format="JPEG")
-    encoded_image = base64.b64encode(byte_arr.getvalue()).decode("ascii")
     filename = Datetime.now().strftime("%Y%m%d-%H%M%S") + ".jpg"
     processor.save_image(uploaded_image_processed, output_directory, filename)
-    uploaded_image_processed_processed_path = output_directory + "/" + filename
-    uploaded_image_embeddings = extract_embedding(
-        uploaded_image_processed_processed_path, embedder
-    )
+    # Extract embeddings from the uploaded image
+    uploaded_image_processed_path = output_directory + "/" + filename
+    uploaded_image_embeddings = extract_embedding(uploaded_image_processed_path, embedder)
     feature_names = [str(i) for i in range(0, 512)]
     df_embeddings = pd.DataFrame(uploaded_image_embeddings)
     df_embeddings.columns = feature_names
+    # Make a prediction using the SVM Classifier
     prediction = top_model.predict(df_embeddings)
     prediction = prediction[0]
+    # Save the prediction to a CSV file
     try:
         df_predicted = pd.read_csv("flask_app/static/predicted.csv")                          ### path
     except pd.errors.EmptyDataError:
@@ -121,7 +120,7 @@ def return_matches():
     new_row = pd.DataFrame(new_data)
     df_predicted = pd.concat([df_predicted, new_row], ignore_index=True)
     df_predicted.to_csv("flask_app/static/predicted.csv", index=False)                        ### path
-    return render_template("upload.html", prediction=prediction, image=encoded_image)
+    return render_template("upload.html", prediction=prediction, filename = filename)
 
 
 # Define a route for the admin dashboard
@@ -133,7 +132,7 @@ def admin_dashboard():
     return render_template("admin_dashboard.html", predictions=predictions_dict)
 
 
-# Define a route for the image page
+# Define a route to view the uploaded image from the admin dashboard
 @app.route("/image/<filename>")
 @login_required
 def image(filename):

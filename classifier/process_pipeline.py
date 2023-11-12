@@ -127,3 +127,4 @@ class ImageProcessor:
                         image = self.process_image(image_path)
                         if image is not None:
                             self.save_image(image, person_output_dir, filename)
+                            

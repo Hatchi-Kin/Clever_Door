@@ -39,14 +39,9 @@ python flask_app/app.py
 │   ├── requirements.txt                 # requirements pour process dataset et train classifier
 │   └── trained_classifier.pkl           # le Support Vector Classifier entrainé
 │   │
-│   ├── Faces_Dataset                    # Raw Dataset
+│   ├── Faces_Dataset_processed          # pre-processed Dataset
 │   │   ├── allowed_list.txt             # liste des noms des personnes authorisées
 │   │   ├── allowed
-│   │   └── not_allowed
-│   │
-│   ├── Faces_Dataset_processed          # pre-processed Dataset
-│   │   ├── allowed
-│   │   ├── not_allowed
 │   │   └── not_allowed
 │   │
 └── flask_app                            

@@ -8,7 +8,7 @@ Il est nécessaire de télécharger ce dataset et de le dezipper dans le dossier
 ## Setup
 
 ```bash
-pip install mega_requirements.txt
+pip install all_requirements.txt
 ```
 
 ```bash

@@ -11,7 +11,7 @@ python app.py
 ## :floppy_disk: Téléchargement du dataset
 
 Le dataset utilisé pour ce projet est disponible sur Google Drive.
-Pour utiliser les scripts dans `calssifier`, il est nécessaire de télécharger ce dataset et de le dezipper dans ce même dossier.
+Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger ce dataset et de le dezipper dans ce même dossier.
 
 [Lien vers Faces_Dataset_processed](https://drive.google.com/file/d/11KawCPnuEFLHctgBaqw3eKaKM5kAfryL/view?usp=sharing)
 

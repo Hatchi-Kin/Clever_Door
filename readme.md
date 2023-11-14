@@ -20,7 +20,7 @@ Pour utiliser les scripts dans `calssifier`, il est nécessaire de télécharger
 ![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/classifier/test_images/pipeline.png)
 
 ## Now with authentication !
-![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/classifier/test_images/admin.png)
+![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/static/imgs/login.png)
 
 
 ## Structure du projet

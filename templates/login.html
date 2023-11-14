@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="w3-container w3-border w3-card-4 w3-round-xlarge w3-padding w3-margin w3-light-grey">
+
+    <div class="w3-container w3-round">
+        <h3 class="w3-padding"><b>Log In</b></h3>
+    </div>
+
+    <form class="w3-container" action="/login" method="POST" >
+        
+        <div class="form-group w3-margin">
+            <label for="email">Email:</label>
+            <input class="w3-input w3-border w3-round" type="email" class="form-control" id="email"
+                placeholder="Enter Email" name="email">
+        </div>
+
+        <div class="form-group w3-margin">
+            <label for="pwd">Password:</label>
+            <input class="w3-input w3-border w3-round" type="password" class="form-control" id="pwd"
+                placeholder="Enter Password" name="password">
+        </div>
+
+        <button class="w3-btn w3-dark-grey w3-padding-large w3-round-large " type="submit">Submit</button>
+        <a href="/register" style="margin-left: 30px"
+            class="w3-btn w3-dark-grey w3-padding-large w3-round-large ">Register New account</a>
+    </form>
+
+</div>
+
+{% endblock %}

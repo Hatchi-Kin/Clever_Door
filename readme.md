@@ -30,8 +30,8 @@ Pour utiliser les scripts dans `calssifier`, il est nécessaire de télécharger
 ├─ app.py                          # Web app Flask
 ├─ readme.md                       # Vous êtes ici !
 ├─ requirements.txt                # requirements pour l'app Flask
-├─ classifier
-│   ├─ allowed_list.txt
+├─ classifier                      # les scripts qui ont permi d'entrainer un classifier
+│   ├─ allowed_list.txt            # liste des noms des personnes considérées "authorisées"
 │   ├─ celeb_embeddings.csv        # dataframe utilisable par Support Vector Classifier
 │   ├─ classifier.ipynb            # permet d'entrainer et d'evaluer un Support Vector Classifier
 │   ├─ dataset_to_csv.ipynb        # permet de créer celeb_embeddings.csv

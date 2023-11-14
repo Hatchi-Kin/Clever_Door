@@ -34,6 +34,7 @@ Project/
 ├── classifier                     # les scripts qui ont permi d'entrainer un classifier
 │   ├── allowed_list.txt           # liste des noms des personnes considérées "authorisées"
 │   ├── celeb_embeddings.csv       # dataframe utilisable par Support Vector Classifier
+│   ├── comparaisons.ipynb         # permet de comparer les performances de plusieurs classifiers
 │   ├── classifier.ipynb           # permet d'entrainer et d'evaluer un Support Vector Classifier
 │   ├── dataset_to_csv.ipynb       # permet de créer celeb_embeddings.csv
 │   ├── process_pipeline.py        # pour pré-traiter une image ou un dataset complet

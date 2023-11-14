@@ -1,0 +1,57 @@
+Structure du dossier pour le volume Windows-SSD
+Le numéro de série du volume est D83F-DEEB
+C:\USERS\JNEED\DESKTOP\NOW
+¦   app.py
+¦   output.txt
+¦   readme.md
+¦   requirements.txt
+¦   
++---classifier
+¦   ¦   allowed_list.txt
+¦   ¦   celeb_embeddings.csv
+¦   ¦   classifier.ipynb
+¦   ¦   dataset_to_csv.ipynb
+¦   ¦   process_pipeline.py
+¦   ¦   requirements.txt
+¦   ¦   trained_classifier.pkl
+¦   ¦   
+¦   +---test_images
+¦           01_buscemi.jpg
+¦           02_pitt.jpg
+¦           03_jolie.jpg
+¦           04_lawrence.jpg
+¦           05_jackman.jpg
+¦           admin.png
+¦           pipeline.png
+¦           rdm01.jpg
+¦           rdm02.jpg
+¦           rdm03.jpg
+¦           rdm04.jpg
+¦           
++---instance
+¦       database.db
+¦       
++---models
+¦       process_pipeline.py
+¦       
++---static
+¦   ¦   trained_classifier.pkl
+¦   ¦   
+¦   +---imgs
+¦   ¦       clever_door.jpg
+¦   ¦       logged_in.png
+¦   ¦       logged_out.png
+¦   ¦       login.png
+¦   ¦       
+¦   +---uploaded_image_processed
+¦           20231114-193423.jpg
+¦           20231114-193433.jpg
+¦           
++---templates
+        base.html
+        dashboard.html
+        image.html
+        index.html
+        login.html
+        register.html
+        

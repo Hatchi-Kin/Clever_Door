@@ -1,13 +1,13 @@
 from models.process_pipeline import ImageProcessor
 from PIL import Image
 import io
-from datetime import datetime as Datetime
+from datetime import datetime
 import numpy as np
 import pandas as pd
 import pickle
 from keras_facenet import FaceNet
 from keras.preprocessing.image import load_img, img_to_array
-from flask import Flask, render_template, redirect, url_for, session, request
+from flask import Flask, render_template, redirect, url_for, send_file, session, request
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
 
@@ -69,7 +69,6 @@ def index():
 @app.route('/register',methods=['GET','POST'])
 def register():
     if request.method == 'POST':
-        # handle request
         name = request.form['name']
         email = request.form['email']
         password = request.form['password']
@@ -111,7 +110,7 @@ def return_matches():
     pil_image = pil_image.convert("RGB")
     byte_arr = io.BytesIO()
     pil_image.save(byte_arr, format="JPEG")
-    filename = Datetime.now().strftime("%Y%m%d-%H%M%S") + ".jpg"
+    filename = datetime.now().strftime("%Y%m%d-%H%M%S") + ".jpg"
     processor.save_image(uploaded_image_processed, output_directory, filename)
     # Extract embeddings from the uploaded image
     uploaded_image_processed_path = output_directory + "/" + filename
@@ -122,43 +121,48 @@ def return_matches():
     # Make a prediction using the SVM Classifier
     prediction = top_model.predict(df_embeddings)
     prediction = prediction[0]
-    # Save the prediction to a CSV file
-    try:
-        df_predicted = pd.read_csv(path_to_predicted_csv)                                      
-    except pd.errors.EmptyDataError:
-        df_predicted = pd.DataFrame(columns=["filename", "df_embeddings", "prediction"])
-    new_data = {
-        "filename": [filename],
-        "df_embeddings": [df_embeddings.to_numpy().tolist()],
-        "prediction": [prediction],
-    }
-    new_row = pd.DataFrame(new_data)
-    df_predicted = pd.concat([df_predicted, new_row], ignore_index=True)
-    df_predicted.to_csv(path_to_predicted_csv, index=False)                                   
+    # Add the filename and prediction columns
+    df_embeddings['filename'] = filename
+    df_embeddings['prediction'] = prediction
+    # Add df_embeddings as a new row to the SQLite database
+    df_embeddings.to_sql('predicted', con=db.engine, if_exists='append', index=False)
+
     return render_template("index.html", prediction=prediction, filename = filename)
 
 
 @app.route('/dashboard')
 def dashboard():
-    if 'email' in session:
-        name = User.query.filter_by(email=session['email']).first().name
-        df_predicted = pd.read_csv(path_to_predicted_csv)                                     
-        length = len(df_predicted)
-        # Only display the last 15 predictions in reverse chronological order
-        df_predicted = df_predicted.tail(15)
-        predictions_dict = dict(zip(df_predicted["filename"], df_predicted["prediction"]))
-        return render_template("dashboard.html", predictions=predictions_dict, length=length, name=name)
-    else:
+    if 'email' not in session:
         return redirect(url_for('login'))
+    name = User.query.filter_by(email=session['email']).first().name
+    # Read the DataFrame from the SQLite database
+    df_predicted = pd.read_sql_table('predicted', con=db.engine)
+    length = len(df_predicted)
+    # Only display the last 15 predictions in reverse chronological order
+    df_predicted = df_predicted.tail(15)
+    predictions_dict = dict(zip(df_predicted["filename"], df_predicted["prediction"]))
+    return render_template("dashboard.html", predictions=predictions_dict, length=length, name=name)
 
 
 @app.route("/image/<filename>")
 def image(filename):
-    if 'email' in session:
-        name = User.query.filter_by(email=session['email']).first().name
-        image_url = url_for("static", filename="uploaded_image_processed/" + filename)
-        return render_template("image.html", image_url=image_url, name=name)
-    return redirect('/login')
+    if 'email' not in session:
+        return redirect('/login')
+    name = User.query.filter_by(email=session['email']).first().name
+    image_url = url_for("static", filename="uploaded_image_processed/" + filename)
+    return render_template("image.html", image_url=image_url, name=name)
+
+
+@app.route('/download_predictions')
+def download_predictions():
+    if 'email' not in session:
+        return redirect('/login')
+    # Read content from SQLite database into DataFrame then let the user download it
+    df_predicted = pd.read_sql_table('predicted', con=db.engine)
+    csv_file = 'static/downloaded_predictions.csv'
+    df_predicted.to_csv(csv_file, index=False)
+    return send_file(csv_file, as_attachment=True)
+
 
 #############################################################################
 

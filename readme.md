@@ -26,42 +26,51 @@ Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger
 ## Structure du projet
 
 ```bash
-.
-├─ app.py                          # Web app Flask
-├─ readme.md                       # Vous êtes ici !
-├─ requirements.txt                # requirements pour l'app Flask
-├─ classifier                      # les scripts qui ont permi d'entrainer un classifier
-│   ├─ allowed_list.txt            # liste des noms des personnes considérées "authorisées"
-│   ├─ celeb_embeddings.csv        # dataframe utilisable par Support Vector Classifier
-│   ├─ classifier.ipynb            # permet d'entrainer et d'evaluer un Support Vector Classifier
-│   ├─ dataset_to_csv.ipynb        # permet de créer celeb_embeddings.csv
-│   ├─ process_pipeline.py         # pour pré-traiter une image ou un dataset complet
-│   ├─ requirements.txt            # requirements pour process dataset et train classifier
-│   ├─ trained_classifier.pkl      # le Support Vector Classifier entrainé
-│   ├─ test_images
-│   │   ├─ 01_buscemi.jpg
-│   │   ├─ 02_pitt.jpg
-│   │   └─ 03_jolie.jpg
+Project/
+├── app.py                         # Web app Flask
+├── README.md                      # Vous êtes ici !
+├── requirements.txt               # requirements pour l'app Flask
+│
+├── classifier                     # les scripts qui ont permi d'entrainer un classifier
+│   ├── allowed_list.txt           # liste des noms des personnes considérées "authorisées"
+│   ├── celeb_embeddings.csv       # dataframe utilisable par Support Vector Classifier
+│   ├── classifier.ipynb           # permet d'entrainer et d'evaluer un Support Vector Classifier
+│   ├── dataset_to_csv.ipynb       # permet de créer celeb_embeddings.csv
+│   ├── process_pipeline.py        # pour pré-traiter une image ou un dataset complet
+│   ├── requirements.txt           # requirements pour process dataset et train classifier
+│   ├── trained_classifier.pkl     # le Support Vector Classifier entrainé
+│   │
+│   ├── test_images                # quelques imgs pour tester l'app
+│   │   ├── 01_buscemi.jpg
+│   │   ├── 02_pitt.jpg
+│   │   └── 03_jolie.jpg
+│   │
 │   └── Faces_Dataset_processed    # pre-processed Dataset
 │       ├── allowed_list.txt       # liste des noms des personnes authorisées
 │       ├── allowed
 │       └── not_allowed
-├─ instance
-│   └─ database.db                 # SQLite pour l'authentification
-├─ models
-│   └─ process_pipeline.py         # pas très DRY toussa
-├─ static
-│   ├─ predicted.csv               # csv contenant les embeddings des imgs uploadées via l'app
-│   ├─ trained_classifier.pkl
-│   └─ imgs
-│       ├─ logged_in.png
-│       └─ logged_out.png
-├─ templates                       # les html avec le moins de JS possible
-│   ├─ base.html
-│   ├─ dashboard.html
-│   ├─ image.html
-│   ├─ index.html
-│   ├─ login.html
-│   └─ register.html
+│
+├── instance
+│   └── database.db                # SQLite pour l'authentification
+│
+├── models
+│   └── process_pipeline.py        # pas très DRY toussa
+│
+├── static
+│   ├── trained_classifier.pkl
+│   │
+│   ├── imgs
+│   │    └── clever_door.jpg
+│   │ 
+│   └── uploaded_image_processed
+│        ├── 20231114-193423.jpg
+│        └── 20231114-193433.jpg
+│ 
+└── templates                       # les html avec le moins de JS possible
+    ├── base.html
+    ├── dashboard.html
+    ├── image.html
+    ├── index.html
+    ├── login.html
+    └── register.html
 ```
-

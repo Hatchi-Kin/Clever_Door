@@ -6,5 +6,5 @@ allowed = [
 'Jennifer_Lawrence',
 'Johnny_Depp',
 'Kate_Winslet',
-Leonardo_DiCaprio, 
+'Leonardo_DiCaprio', 
 ] 

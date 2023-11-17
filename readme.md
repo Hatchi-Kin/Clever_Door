@@ -1,4 +1,4 @@
-## To run the app locally
+## Lancer l'application en local
 
 ```bash
 pip install -r requirements.txt
@@ -8,13 +8,13 @@ pip install -r requirements.txt
 python app.py
 ```
 
-## To deploy in a container
+## Déployer dans un conteneur
 
 ```bash
 docker compose-up -d
 ```
 
-## :floppy_disk: Download dataset
+## :floppy_disk: Télécharger le dataset
 
 Le dataset utilisé pour ce projet est disponible sur Google Drive.
 Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger ce dataset et de le dezipper dans ce même dossier.
@@ -22,16 +22,16 @@ Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger
 [Lien vers Faces_Dataset_processed](https://drive.google.com/file/d/11KawCPnuEFLHctgBaqw3eKaKM5kAfryL/view?usp=sharing)
 
 
-## :play_or_pause_button:  Classifier
+## :play_or_pause_button:  Les étapes pour obtenir notre Classifier
 ![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/website/static/imgs/pipeline.png)
 
-## Now with authentication !
+## App avec l'authentification !
 ![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/website/static/imgs/login.png)
 
-## Choice of the best classifier for the task (SVC)
+## Choix du meilleur classificateur pour la tâche (SVC)
 ![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/website/static/imgs/experiences_best_model.png)
 
-## Project Structure
+## Structure du projet
 
 ```bash
 .

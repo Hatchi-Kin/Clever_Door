@@ -151,6 +151,7 @@ class ImageProcessor:
         filename = datetime.now().strftime("%Y%m%d-%H%M%S") + ".jpg"
         processor.save_image(uploaded_image_processed, output_directory, filename)
         return output_directory + "/" + filename
+
     
     def extract_user_uploaded_embeddings(self, image_path, embedder):
         uploaded_image_embeddings = extract_embedding(image_path, embedder)
@@ -158,6 +159,7 @@ class ImageProcessor:
         df_embeddings = pd.DataFrame(uploaded_image_embeddings)
         df_embeddings.columns = feature_names
         return df_embeddings
+
     
     def make_prediction(self, df_embeddings, top_model):
         prediction = top_model.predict(df_embeddings)

@@ -1,4 +1,3 @@
-
 import numpy as np
 import pandas as pd
 from keras.preprocessing.image import load_img, img_to_array

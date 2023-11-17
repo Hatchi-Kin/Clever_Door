@@ -77,7 +77,6 @@ def download_predictions():
         return redirect('/login')
     # Read content from SQLite database into DataFrame then let the user download it
     df_predicted = pd.read_sql_table('predicted', con=db.engine)
-    # csv_file = '/app/website/static/downloaded_predictions.csv'                                       ## if app running in container
-    csv_file = r'C:\Users\jneed\Documents\projets\z_now\website\static\downloaded_predictions.csv'      ## if NOT in docker container
+    csv_file = '/app/website/static/downloaded_predictions.csv'     ###
     df_predicted.to_csv(csv_file, index=False)
     return send_file(csv_file, as_attachment=True)

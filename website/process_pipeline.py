@@ -2,7 +2,6 @@ from .utils import extract_embedding
 
 import os
 import io
-from PIL import Image
 from datetime import datetime
 
 import cv2

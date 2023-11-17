@@ -44,6 +44,7 @@ Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger
 │   ├── allowed_list.txt           # liste des noms des personnes considérées "authorisées"
 │   ├── dataset_to_csv.ipynb       # permet de créer celeb_embeddings.csv
 │   ├── celeb_embeddings.csv       # dataframe utilisable par Support Vector Classifier
+│   ├── authorized_embeddings.csv  # dataframe utilisable pour K-means
 │   ├── clusters.ipynb             # K-means et les clusters
 │   ├── comparaisons.ipynb         # permet de comparer les performances de plusieurs classifiers
 │   ├── classifier.ipynb           # permet d'entrainer et d'evaluer un Support Vector Classifier

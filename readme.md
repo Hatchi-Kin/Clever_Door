@@ -14,7 +14,7 @@ python app.py
 docker compose-up -d
 ```
 
-## :floppy_disk: Téléchargement du dataset
+## :floppy_disk: Download dataset
 
 Le dataset utilisé pour ce projet est disponible sur Google Drive.
 Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger ce dataset et de le dezipper dans ce même dossier.
@@ -31,7 +31,7 @@ Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger
 ## Choice of the best classifier for the task (SVC)
 ![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/website/static/imgs/experiences_best_model.png)
 
-## Structure du projet
+## Project Structure
 
 ```bash
 .

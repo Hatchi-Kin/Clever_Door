@@ -23,11 +23,13 @@ Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger
 
 
 ## :play_or_pause_button:  Classifier
-![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/classifier/test_images/pipeline.png)
+![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/website/static/imgs/pipeline.png)
 
 ## Now with authentication !
-![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/static/imgs/login.png)
+![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/website/static/imgs/login.png)
 
+## Choice of the best classifier for the task (SVC)
+![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/website/static/imgs/experiences_best_model.png)
 
 ## Structure du projet
 

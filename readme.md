@@ -25,7 +25,7 @@ Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger
 ## :play_or_pause_button:  Les étapes pour obtenir notre Classifier
 ![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/website/static/imgs/pipeline.png)
 
-## App avec l'authentification !
+## App avec authentification !
 ![Image](https://raw.githubusercontent.com/Hatchi-Kin/Clever_Door/main/website/static/imgs/login.png)
 
 ## Choix du meilleur classificateur pour la tâche (SVC)

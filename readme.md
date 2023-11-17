@@ -60,7 +60,7 @@ Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger
 └── website
     ├── __init__.py
     ├── auth.py                    # routes pour gerer l'authentification
-    └── views.py                   # les routes du sites
+    ├── views.py                   # les routes du sites
     ├── models.py                  # les tables de la bdd
     ├── process_pipeline.py        # pas très DRY d'avoir deux fois ce fichiers...
     ├── utils.py                   # fonctions utiles

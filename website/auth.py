@@ -1,8 +1,10 @@
-from flask import Blueprint, request, render_template, redirect, url_for, session
 from . import db
 from .models import User
 
+from flask import Blueprint, request, render_template, redirect, url_for, session
+
 auth = Blueprint("auth", __name__)
+
 
 # Define routes for user registration, login and logout
 @auth.route('/register',methods=['GET','POST'])
@@ -36,3 +38,4 @@ def login():
 def logout():
     session.pop('email',None)
     return redirect('/login')
+    

@@ -13,6 +13,12 @@
   </form>
  </div>
 
+ {% if prediction_failed is defined %}
+    <div class="w3-container w3-light-grey w3-center" style="margin-top:25px">
+        <h2>{{ prediction_failed }}</h2>
+    </div>
+ {% endif %}
+
  {% if prediction is defined %}
  <div class="w3-container w3-light-grey w3-center" style="margin-top:25px">
     <img src="{{ url_for('static', filename='uploaded_image_processed/' + filename) }}" alt="Uploaded Image" style="max-width: 300px; margin-top:15px">

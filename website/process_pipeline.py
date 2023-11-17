@@ -1,7 +1,15 @@
+from .utils import extract_embedding
+
+import os
+import io
+from PIL import Image
+from datetime import datetime
+
 import cv2
 from PIL import Image
-import os
+
 import numpy as np
+import pandas as pd
 from mtcnn import MTCNN
 
 # ##### Create an instance of the ImageProcessor class #####
@@ -130,3 +138,30 @@ class ImageProcessor:
                         image = self.process_image(image_path)
                         if image is not None:
                             self.save_image(image, person_output_dir, filename)
+
+#################################################################################
+
+    def process_user_uploaded_image(self, uploaded_image, processor, output_directory):
+        uploaded_image_processed = processor.process_image(image_input=uploaded_image)
+        if uploaded_image_processed is None:
+            return None
+        pil_image = Image.fromarray((uploaded_image_processed).astype(np.uint8))
+        pil_image = pil_image.convert("RGB")
+        byte_arr = io.BytesIO()
+        pil_image.save(byte_arr, format="JPEG")
+        filename = datetime.now().strftime("%Y%m%d-%H%M%S") + ".jpg"
+        processor.save_image(uploaded_image_processed, output_directory, filename)
+        return output_directory + "/" + filename
+    
+    def extract_user_uploaded_embeddings(self, image_path, embedder):
+        uploaded_image_embeddings = extract_embedding(image_path, embedder)
+        feature_names = [str(i) for i in range(0, 512)]
+        df_embeddings = pd.DataFrame(uploaded_image_embeddings)
+        df_embeddings.columns = feature_names
+        return df_embeddings
+    
+    def make_prediction(self, df_embeddings, top_model):
+        prediction = top_model.predict(df_embeddings)
+        prediction = prediction[0]
+        df_embeddings['prediction'] = prediction
+        return prediction, df_embeddings

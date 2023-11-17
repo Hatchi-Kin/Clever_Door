@@ -31,11 +31,11 @@
     <div class="w3-col s8 w3-bar">
       {% if name %}
         <span>Welcome, <strong>{{ name }}</strong></span><br>
-        <a href="{{ url_for('logout')}}" class="w3-bar-item w3-button w3-red w3-opacity"><i class='fa fa-sign-out'></i></a>
+        <a href="{{ url_for('auth.logout')}}" class="w3-bar-item w3-button w3-red w3-opacity"><i class='fa fa-sign-out'></i></a>
       {% else %}
         <span>sign in, <strong>maybe?</strong></span><br>
-        <a href="{{ url_for('login')}}" class="w3-bar-item w3-button w3-green w3-opacity"><i class="fa fa-sign-in"></i></a>
-        <a href="{{url_for('register')}}" class="w3-bar-item w3-button w3-blue w3-opacity"><i class='fa fa-user-plus'></i></a>
+        <a href="{{ url_for('auth.login')}}" class="w3-bar-item w3-button w3-green w3-opacity"><i class="fa fa-sign-in"></i></a>
+        <a href="{{url_for('auth.register')}}" class="w3-bar-item w3-button w3-blue w3-opacity"><i class='fa fa-user-plus'></i></a>
       {% endif %}
     </div>
 </div>
@@ -48,8 +48,8 @@
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="{{ url_for('index') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  Acceuil</a>
-    <a href="{{ url_for('dashboard') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Admin Dashboard</a>
+    <a href="{{ url_for('views.index') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  Acceuil</a>
+    <a href="{{ url_for('views.dashboard') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Admin Dashboard</a>
   </div>
 </nav>
 
@@ -61,7 +61,7 @@
 
   <!-- Header -->
   <header class="w3-container w3-center">
-    <h1 class="w3-jumbo"><b><a href="{{ url_for('index') }}">Clever Door</a></b></h1>
+    <h1 class="w3-jumbo"><b><a href="{{ url_for('views.index') }}">Clever Door</a></b></h1>
  </header>
 
  <div style="padding-bottom: 70px;">

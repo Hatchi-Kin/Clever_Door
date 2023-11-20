@@ -38,7 +38,7 @@ Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger
 .
 ├── app.py                         # Web app Flask
 ├── README.md                      # Vous êtes ici !
-├── Dockerfile                     # docker-compuse up pour deployer dans un container
+├── Dockerfile                     # docker-compose up pour deployer dans un container
 ├── docker-compose.yml
 ├── requirements.txt               # requirements pour l'app Flask
 ├── classifier                     # les scripts qui ont permi d'entrainer un classifier

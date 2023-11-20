@@ -69,12 +69,13 @@ def dashboard():
 def image(filename):
     if 'email' not in session:
         return redirect('/login')
-    
     name = User.query.filter_by(email=session['email']).first().name
     image_url = url_for("static", filename="uploaded_image_processed/" + filename)
 
+    # Load the dataset of all embeddings
     df_mega_faces = pd.read_csv(path_to_mega_faces_dataset)
-
+    # Extract the embedding for the image/<filename> 
+    # and drop a column (so it has the same number of columns as df_mega_faces)
     df_new = extract_embedding(f"website/static/uploaded_image_processed/{filename}", embedder)
     df_new = df_new.drop(columns=[511])
     # Ensure the embeddings are in the same format and order
@@ -84,10 +85,9 @@ def image(filename):
     # Store 'filename', 'filepath', and 'label' in a new DataFrame and add 'similarity'
     df_result = df_mega_faces[df_mega_faces.columns[:3]].copy()
     df_result['similarity'] = df_mega_faces['similarity']
-    # Sort by similarity and get the top 3
+    # Sort by similarity and get the top 5
     top_5 = df_result.nsmallest(5, 'similarity')
-
-    # Create a list of dictionaries for top 3 items
+    # Create a list of dictionaries for top 3 items top_5_list[1:-1]
     top_5_list = []
     for i in range(5):
         filepath = top_5.iloc[i]['filepath']
@@ -95,7 +95,7 @@ def image(filename):
         top_5_list.append({"filepath": "/static/" + filepath.replace("\\", "/"), "similarity": similarity})
 
     return render_template("image.html", image_url=image_url, name=name, top_5_list=top_5_list[1:-1])
-        # return render_template("image.html", image_url=image_url, name=name)
+
 
 
 @views.route('/download_predictions')

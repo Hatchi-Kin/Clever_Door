@@ -41,6 +41,7 @@ Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger
 ├── Dockerfile                     # docker-compose up pour deployer dans un container
 ├── docker-compose.yml
 ├── requirements.txt               # requirements pour l'app Flask
+│
 ├── classifier                     # les scripts qui ont permi d'entrainer un classifier
 │   │
 │   ├── process_pipeline.py        # pour pré-traiter une image ou un dataset complet
@@ -49,6 +50,8 @@ Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger
 │   ├── celeb_embeddings.csv       # dataframe utilisable par Support Vector Classifier
 │   ├── authorized_embeddings.csv  # dataframe utilisable pour K-means
 │   ├── clusters.ipynb             # K-means et les clusters
+│   ├── similarity.ipynb           # permet de tester la recherche par similarité
+│   ├── mega_faces_dataset.csv     # embeddings de tout le dataset
 │   ├── comparaisons.ipynb         # permet de comparer les performances de plusieurs classifiers
 │   ├── classifier.ipynb           # permet d'entrainer et d'evaluer un Support Vector Classifier
 │   ├── requirements.txt           # requirements pour process dataset et train classifier

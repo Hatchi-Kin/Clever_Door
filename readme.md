@@ -69,10 +69,12 @@ Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger
     ├── utils.py                   # fonctions utiles
     │
     ├── static
-    │   ├── downloaded_predictions.csv
+    │   ├── Faces_Dataset_processed/
     │   ├── imgs/
-    │   ├── trained_classifier.pkl
-    │   └── uploaded_image_processed/
+    │   ├── uploaded_image_processed/
+    │   ├── downloaded_predictions.csv
+    │   ├── mega_faces_dataset.csv     # embeddings de tout le dataset
+    │   └── trained_classifier.pkl
     │
     └── templates                  # les html avec le moins de JS possible
         ├── base.html

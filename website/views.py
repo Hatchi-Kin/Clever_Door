@@ -71,7 +71,6 @@ def image(filename):
         return redirect('/login')
     name = User.query.filter_by(email=session['email']).first().name
     image_url = url_for("static", filename="uploaded_image_processed/" + filename)
-
     # Load the dataset of all embeddings
     df_mega_faces = pd.read_csv(path_to_mega_faces_dataset)
     # Extract the embedding for the image/<filename> 
@@ -93,7 +92,6 @@ def image(filename):
         filepath = top_5.iloc[i]['filepath']
         similarity = top_5.iloc[i]['similarity']
         top_5_list.append({"filepath": "/static/" + filepath.replace("\\", "/"), "similarity": similarity})
-
     return render_template("image.html", image_url=image_url, name=name, top_5_list=top_5_list[1:-1])
 
 

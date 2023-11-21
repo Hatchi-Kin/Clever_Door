@@ -1,10 +1,9 @@
 from .process_pipeline import ImageProcessor
 from . import db
-from .models import User, Post
+from .models import User
 import pickle
-
 from keras_facenet import FaceNet
-from flask import Blueprint, render_template, redirect, url_for, session, request
+from flask import Blueprint, render_template, session, request
 
 
 processor = ImageProcessor()
@@ -12,6 +11,7 @@ embedder = FaceNet()
 top_model = pickle.load(open("website/static/trained_classifier.pkl", "rb"))                         
 output_directory = "website/static/uploaded_image_processed"  
 views = Blueprint("views", __name__)
+
 
 
 @views.route('/')
@@ -35,19 +35,3 @@ def return_matches():
     df_embeddings['filename'] = uploaded_image_processed_path.split('/')[-1]
     df_embeddings.to_sql('predicted', con=db.engine, if_exists='append', index=False)
     return render_template("index.html", prediction=prediction, filename = uploaded_image_processed_path.split('/')[-1])
-
-    
-@views.route('/contact', methods=['GET', 'POST'])
-def contact():
-    if 'email' not in session:
-        return redirect(url_for('auth.login'))
-    name = User.query.filter_by(email=session['email']).first().name
-
-    if request.method == 'POST':
-        text = request.form['message']
-        new_post = Post(username=name,text=text)
-        db.session.add(new_post)
-        db.session.commit()
-
-    last_ten = Post.get_last_ten_posts()
-    return render_template('contact.html', last_ten=last_ten, name=name)

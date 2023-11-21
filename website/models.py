@@ -40,5 +40,4 @@ class Post(db.Model):
 
     def get_last_ten_posts():
         last_ten = Post.query.order_by(Post.id.desc()).limit(10).all()
-        return last_ten
-    
+        return last_ten 

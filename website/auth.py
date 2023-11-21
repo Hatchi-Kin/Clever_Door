@@ -1,12 +1,10 @@
 from . import db
 from .models import User
-
 from flask import Blueprint, request, render_template, redirect, url_for, session
 
 auth = Blueprint("auth", __name__)
 
 
-# Define routes for user registration, login and logout
 @auth.route('/register',methods=['GET','POST'])
 def register():
     if request.method == 'POST':
@@ -28,7 +26,7 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user and user.check_password(password):
             session['email'] = user.email
-            return redirect(url_for('views.dashboard'))
+            return redirect(url_for('admin.dashboard'))
         else:
             return render_template('login.html',error='Invalid user')
     return render_template('login.html')

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="w3-container w3-border w3-card-4 w3-round-xlarge w3-padding w3-margin w3-light-grey">
+
+
+
+    <div class="w3-container w3-twothird">
+        {% for row in last_ten %}
+        <div class="w3-panel w3-small w3-border w3-white w3-round-large">
+            <p>{{ row['username'] }}:</p>
+            <p class="w3-margin-left w3-large">{{ row['text'] }}</p>
+        </div>{% endfor %}
+    </div>
+
+
+    <form class="w3-third" action="/contact" method="post">
+
+        <div class="w3-container w3-center" style="margin-top:30px;">
+            <img src="/static/imgs/chat_door.jpg" alt="chat_door" class="w3-card" style="max-width:320px">
+        </div>
+
+        <div class="w3-section">
+            <label class="w3-xlarge">Message</label>
+            <textarea class="w3-input w3-border" style="resize: none" type="text" name="message" required=""></textarea>
+        </div>
+
+        <button type="submit" class="w3-button w3-block w3-padding-large w3-green w3-opacity">Send Message</button>
+
+    </form>
+
+</div>
+
+{% endblock %}

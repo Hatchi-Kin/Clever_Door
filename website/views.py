@@ -1,31 +1,17 @@
 from .process_pipeline import ImageProcessor
 from . import db
-from .models import User
-from .utils import extract_embedding, calculate_similarity, get_top_5_df, get_top_3_list
-
-from datetime import datetime
+from .models import User, Post
 import pickle
-from PIL import Image
-import io
 
-import numpy as np
-import pandas as pd
 from keras_facenet import FaceNet
-from scipy.spatial.distance import cosine
-
-from flask import Blueprint, render_template, redirect, url_for, send_file, session, request
-
+from flask import Blueprint, render_template, redirect, url_for, session, request
 
 
 processor = ImageProcessor()
 embedder = FaceNet()
 top_model = pickle.load(open("website/static/trained_classifier.pkl", "rb"))                         
 output_directory = "website/static/uploaded_image_processed"  
-
-path_to_mega_faces_dataset = "website/static/mega_faces_dataset.csv"
-
 views = Blueprint("views", __name__)
-
 
 
 @views.route('/')
@@ -36,7 +22,7 @@ def index():
     else:
          return render_template('index.html')
     
-
+    
 # Define a route to upload an image and return the prediction
 @views.route("/matches", methods=["POST"])
 def return_matches():
@@ -50,47 +36,18 @@ def return_matches():
     df_embeddings.to_sql('predicted', con=db.engine, if_exists='append', index=False)
     return render_template("index.html", prediction=prediction, filename = uploaded_image_processed_path.split('/')[-1])
 
-
-@views.route('/dashboard')
-def dashboard():
+    
+@views.route('/contact', methods=['GET', 'POST'])
+def contact():
     if 'email' not in session:
         return redirect(url_for('auth.login'))
     name = User.query.filter_by(email=session['email']).first().name
-    # Read the DataFrame from the SQLite database
-    df_predicted = pd.read_sql_table('predicted', con=db.engine)
-    length = len(df_predicted)
-    # Only display the last 15 predictions in reverse chronological order
-    df_predicted = df_predicted.tail(15)
-    predictions_dict = dict(zip(df_predicted["filename"], df_predicted["prediction"]))
-    return render_template("dashboard.html", predictions=predictions_dict, length=length, name=name)
 
+    if request.method == 'POST':
+        text = request.form['message']
+        new_post = Post(username=name,text=text)
+        db.session.add(new_post)
+        db.session.commit()
 
-@views.route("/image/<string:filename>")
-def image(filename):
-    if 'email' not in session:
-        return redirect('/login')
-    name = User.query.filter_by(email=session['email']).first().name
-    image_url = url_for("static", filename="uploaded_image_processed/" + filename)
-    # Load the dataset of all embeddings an extract the embedding of the uploaded image
-    df_mega_faces = pd.read_csv(path_to_mega_faces_dataset)
-    df_new = extract_embedding(f"website/static/uploaded_image_processed/{filename}", embedder)
-    # drop a column (so it has the same number of columns as df_mega_faces)
-    df_new = df_new.drop(columns=[511])
-    # Ensure the embeddings are in the same format and order
-    df_new.columns = df_mega_faces.columns[3:-1]
-    df_mega_faces = calculate_similarity(df_mega_faces, df_new)
-    top_5 = get_top_5_df(df_mega_faces)
-    top_3_list = get_top_3_list(top_5)
-    return render_template("image.html", image_url=image_url, name=name, top_3_list=top_3_list)
-
-
-
-@views.route('/download_predictions')
-def download_predictions():
-    if 'email' not in session:
-        return redirect('/login')
-    # Read content from SQLite database into DataFrame then let the user download it
-    df_predicted = pd.read_sql_table('predicted', con=db.engine)
-    csv_file = '/app/website/static/downloaded_predictions.csv'     ###
-    df_predicted.to_csv(csv_file, index=False)
-    return send_file(csv_file, as_attachment=True)
+    last_ten = Post.get_last_ten_posts()
+    return render_template('contact.html', last_ten=last_ten, name=name)

@@ -13,18 +13,24 @@ def create_app():
 
     from .views import views
     from .auth import auth
+    from .admin import admin
+    from .logged import logged
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
+    app.register_blueprint(admin, url_prefix="/")
+    app.register_blueprint(logged, url_prefix="/")
 
-    from .models import User
-    create_database(app)
+    with app.app_context():
+        from .models import User, Post
+        create_database(app)
+        User.create_admin()
 
     return app
 
 
-def create_database(app):
 
+def create_database(app):
     with app.app_context():
         db.create_all()
         print("Created database!")

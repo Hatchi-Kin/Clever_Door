@@ -1,12 +1,9 @@
 from .utils import extract_embedding
-
 import os
 import io
 from datetime import datetime
-
 import cv2
 from PIL import Image
-
 import numpy as np
 import pandas as pd
 from mtcnn import MTCNN

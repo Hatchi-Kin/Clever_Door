@@ -63,24 +63,26 @@ Pour utiliser les scripts dans `classifier`, il est nécessaire de télécharger
 └── website
     ├── __init__.py
     ├── auth.py                    # routes pour gerer l'authentification
-    ├── views.py                   # les routes du sites
+    ├── views.py                   # les routes ouvertes à tous
+    ├── admin.py                   # routes uniquement accessibles à l'admin
+    ├── logged.py                  # routes uniquement aux utilisateurs connectés
     ├── models.py                  # les tables de la bdd
     ├── process_pipeline.py        # pas très DRY d'avoir deux fois ce fichier...
     ├── utils.py                   # fonctions utiles
     │
     ├── static
+    │   ├── downloaded_predictions.csv
     │   ├── Faces_Dataset_processed/
     │   ├── imgs/
     │   ├── uploaded_image_processed/
-    │   ├── downloaded_predictions.csv
-    │   ├── mega_faces_dataset.csv     # embeddings de tout le dataset
     │   └── trained_classifier.pkl
     │
     └── templates                  # les html avec le moins de JS possible
         ├── base.html
-        ├── dashboard.html
-        ├── image.html
         ├── index.html
         ├── login.html
-        └── register.html
+        ├── register.html
+        ├── dashboard.html
+        ├── contact.html
+        └── image.html
 ```

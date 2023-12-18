@@ -27,6 +27,8 @@ def index():
 @views.route("/matches", methods=["POST"])
 def return_matches():
     uploaded_image = request.files["image"]
+    if not uploaded_image:
+        return render_template ("index.html", prediction_failed="Pas d'image envoyée ... Réessaie encore boulet va")
     uploaded_image_processed_path = processor.process_user_uploaded_image(uploaded_image, processor, output_directory)
     if uploaded_image_processed_path is None:
         return render_template("index.html", prediction_failed='MTCNN could not detect a face. Please try another image.')

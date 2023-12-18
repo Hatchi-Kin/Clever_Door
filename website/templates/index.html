@@ -8,9 +8,19 @@
 
   <form class="w3-container w3-padding-48 " method="POST" action="/matches" enctype="multipart/form-data"
       onsubmit="return checkImageSelected()">
-      <input type="file" name="image" id="image" style="margin:14px">
+      <input type="file" name="image" id="image" style="margin:14px" onchange="loadFile(event)">
+      <img id="output" width="200">
       <input type="submit" value="check face" style="margin:14px">
-  </form>
+</form>
+<script>
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+        URL.revokeObjectURL(output.src) // free memory
+    }
+};
+</script>
  </div>
 
  {% if prediction_failed is defined %}

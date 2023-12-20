@@ -15,11 +15,13 @@ def create_app():
     from .auth import auth
     from .admin import admin
     from .logged import logged
+    from .video import video
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
     app.register_blueprint(admin, url_prefix="/")
     app.register_blueprint(logged, url_prefix="/")
+    app.register_blueprint(video, url_prefix="/video")
 
     with app.app_context():
         from .models import User, Post

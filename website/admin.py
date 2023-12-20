@@ -7,6 +7,7 @@ import pandas as pd
 from scipy.spatial.distance import cosine
 from keras_facenet import FaceNet
 from flask import Blueprint, render_template, redirect, url_for, send_file, session, current_app
+from pycaret.classification import *
 
 
 path_to_mega_faces_dataset = "website/static/mega_faces_dataset.csv"

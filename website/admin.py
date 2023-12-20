@@ -14,6 +14,7 @@ from keras_facenet import FaceNet
 from flask import Blueprint, render_template, redirect, url_for, send_file, session, current_app, request
 
 
+
 path_to_mega_faces_dataset = "website/static/mega_faces_dataset.csv"
 embedder = FaceNet()
 admin = Blueprint("admin", __name__)

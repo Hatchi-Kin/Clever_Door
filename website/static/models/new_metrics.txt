@@ -1,0 +1,7 @@
+Confusion Matrix:
+[[150  0]
+ [ 0 177]]
+
+Accuracy: 1
+
+F1 Score: 1

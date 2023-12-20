@@ -3,6 +3,30 @@
 {% block content %}
 
 <div class="w3-container w3-border w3-card-4 w3-round-xlarge w3-padding w3-margin w3-light-grey">
+    <div class="w3-display-container">
+        <h2 class="w3-center w3-xlarge">Liste des datasets et modèles disponibles</h2>
+        <table class="w3-table-all w3-hoverable w3-margin-bottom w3-large">
+            <thead>
+                <tr class="w3-light-grey w3-center">
+                <th class="w3-center">Dataset</th>
+                <th class="w3-center">Model</th>
+                <th class="w3-center">Metrics</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for dataset in datasets %}
+            <tr>
+                <td class="w3-center"><a href="{{ url_for('admin.file_metadata', filename=dataset.filename) }}">{{ dataset.filename }}</a></td>
+                <td class="w3-center">{{ dataset.model_filename }}</td>
+                <td class="w3-center">{{ dataset.metrics }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="w3-container w3-border w3-card-4 w3-round-xlarge w3-padding w3-margin w3-light-grey">
     <div class="w3-display-container ">
         <h2 class="w3-margin-bottom w3-center w3-xxlarge">Creer un dataset custom</h2>
         <table class="w3-table-all w3-hoverable w3-margin-bottom w3-large">
@@ -35,16 +59,7 @@
 <p>{{ checked_celebrities }}</p>
 {% endif %}
 
-<div class="w3-container w3-border w3-card-4 w3-round-xlarge w3-padding w3-margin w3-light-grey">
-    <div class="w3-display-container">
-        <ul class="w3-ul w3-center w3-xlarge" >
-            <li><h2>Liste des datasets disponibles</h2></li>
-            {% for filename in filenames %}
-            <li>{{ filename }}</li>
-            {% endfor %}
-          </ul>
-    </div>
-</div>
+
 
 
 

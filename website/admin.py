@@ -104,6 +104,32 @@ def file_metadata(filename):
         "num_celebrities": num_celebrities,
         "allowed_celebrities": allowed_celebrities,
     }
+    # check in the models directory if there is a model with the same name as the filename
+    # If there is we don't display the button to train the model
+    base_filename = filename.split('_', 1)[0]
+    models = os.listdir('website/static/models/')
+    models = [model.split('_', 1)[0] for model in models]
+    if base_filename in models:
+        metadata['model_trained'] = True
+        # Read the metrics
+        metrics_filename = base_filename + '_metrics.txt'
+        try:
+            with open(f"website/static/models/{metrics_filename}", 'r') as file:
+                lines = file.readlines()
+                if len(lines) >= 7:
+                    accuracy = float(lines[4].split(":")[1].strip())
+                    f1 = float(lines[6].split(":")[1].strip())
+                    metrics = f"Accuracy: {accuracy:.4f}\nF1 Score: {f1:.4f}"
+                    metadata['metrics'] = metrics
+                else:
+                    metrics = "Metrics not available"
+                    metadata['metrics'] = metrics
+        except FileNotFoundError:
+            metrics = "Metrics not available"
+            metadata['metrics'] = metrics
+    else:
+        metadata['model_trained'] = False
+    
     return render_template('file_metadata.html', filename=filename, metadata=metadata)
 
 

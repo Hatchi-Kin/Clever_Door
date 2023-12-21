@@ -18,13 +18,13 @@
     </div>
 </div>
 
-{% if not metadata.model_trained %}
+
+{% if not metadata.trained %}
 <div class="w3-display-container" style="margin-top:48px;">
     <div class="w3-center w3-margin-bottom w3-margin-top">
         <a href="{{ url_for('admin.train_models', filename=filename) }}" class="w3-button w3-round w3-xlarge w3-dark-grey">Train SVM Binary Classifier on that dataset</a>
     </div>
 </div>
 {% endif %}
-
 
 {% endblock %}

@@ -9,6 +9,16 @@ from flask import Blueprint, render_template, session, request, redirect, url_fo
 processor = ImageProcessor()
 embedder = FaceNet()
 
+
+def return_model():
+    """Return the model to use for the prediction"""
+    # Read the model name from the file
+    with open('website/static/models/chosen_model.txt', 'r') as f:
+        model_name = f.read().strip()
+    # Load the model
+    top_model = pickle.load(open(f"website/static/models/{model_name}", "rb"))
+    return top_model
+ 
                      
 output_directory = "website/static/uploaded_image_processed"  
 views = Blueprint("views", __name__)
@@ -36,11 +46,7 @@ def return_matches():
     if uploaded_image_processed_path is None:
         return render_template("index.html", prediction_failed='MTCNN could not detect a face. Please try another image.', name = name)
     df_embeddings = processor.extract_user_uploaded_embeddings(uploaded_image_processed_path, embedder)
-    # Read the model name from the file
-    with open('website/static/models/chosen_model.txt', 'r') as f:
-        model_name = f.read().strip()
-    # Load the model
-    top_model = pickle.load(open(f"website/static/models/{model_name}", "rb"))  
+    top_model = return_model()
     prediction, df_embeddings = processor.make_prediction(df_embeddings, top_model)
     df_embeddings['filename'] = uploaded_image_processed_path.split('/')[-1]
     df_embeddings.to_sql('predicted', con=db.engine, if_exists='append', index=False)

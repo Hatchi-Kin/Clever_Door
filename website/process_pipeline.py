@@ -149,7 +149,19 @@ class ImageProcessor:
         processor.save_image(uploaded_image_processed, output_directory, filename)
         return output_directory + "/" + filename
 
-    
+    def process_video(self, image, processor, output_directory):
+        image_processed = processor.process_image(image_input=image)
+        if image_processed is None:
+            return None
+        pil_image = Image.fromarray((image_processed).astype(np.uint8))
+        pil_image = pil_image.convert("RGB")
+        byte_arr = io.BytesIO()
+        pil_image.save(byte_arr, format="JPEG")
+        filename = "screenshot_processed.jpg"
+        processor.save_image(image_processed, output_directory, filename)
+        return output_directory + "/" + filename
+
+
     def extract_user_uploaded_embeddings(self, image_path, embedder):
         uploaded_image_embeddings = extract_embedding(image_path, embedder)
         feature_names = [str(i) for i in range(0, 512)]

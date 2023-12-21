@@ -8,7 +8,13 @@ from flask import Blueprint, render_template, session, request, redirect, url_fo
 
 processor = ImageProcessor()
 embedder = FaceNet()
-top_model = pickle.load(open("website/static/trained_classifier.pkl", "rb"))                         
+
+# Read the model name from the file
+with open('website/static/models/chosen_model.txt', 'r') as f:
+    model_name = f.read().strip()
+# Load the model
+top_model = pickle.load(open(f"website/static/models/{model_name}", "rb"))  
+                     
 output_directory = "website/static/uploaded_image_processed"  
 views = Blueprint("views", __name__)
 

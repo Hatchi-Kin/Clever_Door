@@ -170,7 +170,6 @@ def create_dataset():
         # Save the new df to a csv file with the current datetime as the name
         current_datetime = datetime.now().strftime("%Y%m%d%H%M%S")
         new_df.to_csv(f'website/static/custom_datasets/{current_datetime}_dataset.csv', index=False)
-    
     # Get a list of all filenames and models
     filenames = os.listdir('website/static/custom_datasets/')
     models = os.listdir('website/static/models/')
@@ -204,5 +203,17 @@ def create_dataset():
             "metrics": metrics,
         }
         datasets.append(dataset)
+    # Read the model name from the file
+    with open('website/static/models/chosen_model.txt', 'r') as f:
+        chosen_model = f.read().strip()
+    return render_template("create_dataset.html", name=name, allowed_celebrities=allowed_celebrities, checked_celebrities=checked_celebrities, filenames=filenames, datasets=datasets, chosen_model=chosen_model)
 
-    return render_template("create_dataset.html", name=name, allowed_celebrities=allowed_celebrities, checked_celebrities=checked_celebrities, filenames=filenames, datasets=datasets)
+
+@admin.route('/choose_model', methods=['POST'])
+def choose_model():
+    chosen_model = request.form.get('chosen_model')
+    if chosen_model:
+        # Save the path of the chosen model to a file
+        with open('website/static/models/chosen_model.txt', 'w') as f:
+            f.write(chosen_model)
+    return redirect(url_for('admin.create_dataset'))
